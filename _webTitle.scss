@@ -1,0 +1,31 @@
+h1.webTitle{
+    background: rgba(44, 44, 44, 0.4392156863);
+    width: fit-content;
+    position: relative;
+    padding: 20px;
+    border-radius: 20px;
+    border: 6px double #fff;
+    color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    margin: 0;
+    margin-top: 20px;
+    span.catImage{
+        width: 50px;
+        height: 50px;
+        background: #e1e1e1;
+        position: relative;
+        background-image: url("https://i.pinimg.com/originals/02/30/1f/02301f1307b63b6440b2d704ca48599e.gif");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        margin-left: 20px;
+    }
+}

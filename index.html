@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Удобный генератор QR кодов build-1.17.1">
+<meta property="og:title" content="QR Генератор от Димана v1.17.1 ✨">
+<meta property="og:description" content="Удобный генератор QR кодов build-1.17.1">
+<meta property="og:image" content="img/title.png">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/title.png">
+<meta name="twitter:card" content="img/title.png" />
+<meta name="twitter:image" content="img/title.png" />
+
+<title>QR Генератор от Димана v1.17.1</title>
+<link rel="shortcut icon" class="favIcon" href="img/icon.ico" type="image/x-icon">
+<!--D-->
+<link rel="stylesheet" href="css/styles.css?v=1.17.1">
+<!--D-->
+<!-- <link rel="stylesheet" href="media.css"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="apple-touch-icon" class="favIcon" href="img/icon.png">
+<link rel="shortcut icon" class="favIcon" href="img/icon.ico">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+
+<!--! PreLoad -->
+<!-- Audio -->
+<link rel="preload" href="audio/cannceled.wav" as="audio">
+<link rel="preload" href="audio/lotsGenerated.wav" as="audio">
+<link rel="preload" href="audio/input.mp3" as="audio">
+<link rel="preload" href="audio/clear.mp3" as="audio">
+<link rel="preload" href="audio/click.mp3" as="audio">
+<!--! PreLoad -->
+
+<style class="mainStyle">
+
+</style>
+</head>
+<body>
+    <section class="bodyDOM">
+        <section class="settings" active>
+            <h1 class="settingsMenuTitle">
+                Настройки
+                <button class="backToWeb">
+                    <i class="fa-solid fa-arrow-left-long-to-line"></i>
+                </button>
+            </h1>
+            <div class="settingItem">
+                <h1 class="settingItemTitle">Анимация частиц заднего фона:</h1>
+                <div class="canvasSettings">
+                    <p>Частота обновлений кадров (FPS) : <span class="canvasFps">0</span></p>
+                    <p>Количество частиц : 
+                        <span class="canvasParticleCount">
+                            0
+                        </span>
+                        <button class="particleCountScaleDown">
+                            <i class="fa-regular fa-arrow-down-to-dotted-line"></i>
+                        </button>
+                        <button class="particleCountScaleUp">
+                            <i class="fa-regular fa-arrow-up-to-dotted-line"></i>
+                        </button>
+                    </p>
+                    <p>Частицы видны : 
+                        <button class="canvasLow"><i class="fa-solid fa-eye"></i></button>
+                        <button class="canvasHigh" disabled><i class="fa-solid fa-eye-slash"></i></button>
+                    </p>
+                </div>
+            </div>
+            <div class="settingItem">
+                <h1 class="settingItemTitle">Звуковые эффекты:</h1>
+                <div class="soundSettings">
+                    <p class="soundOptionMain">Все звуковые эффекты: 
+                        <button class="soundMain-ON">
+                            <i class="fa-solid fa-volume"></i>
+                        </button>
+                        <button class="soundMain-OFF">
+                            <i class="fa-solid fa-volume-slash"></i>
+                        </button>
+                    </p>
+                    <p class="soundOption">
+                        <button class="testSound textSound-TEST">
+                            <i class="fa-solid fa-music"></i>
+                        </button>
+                        Звук написания текста: 
+                        <button class="textSound-ON">
+                            <i class="fa-solid fa-volume"></i>
+                        </button>
+                        <button class="textSound-OFF">
+                            <i class="fa-solid fa-volume-slash"></i>
+                        </button>
+                    </p>
+                    <p class="soundOption">
+                        <button class="testSound attentionSound-TEST">
+                            <i class="fa-solid fa-music"></i>
+                        </button>
+                        Звук предупреждения: 
+                        <button class="attentionSound-ON">
+                            <i class="fa-solid fa-volume"></i>
+                        </button>
+                        <button class="attentionSound-OFF">
+                            <i class="fa-solid fa-volume-slash"></i>
+                        </button>
+                    </p>
+                    <p class="soundOption">
+                        <button class="testSound keyboardSound-TEST">
+                            <i class="fa-solid fa-music"></i>
+                        </button>
+                        Звук нажатия кнопок: 
+                        <button class="keyboardSound-ON">
+                            <i class="fa-solid fa-volume"></i>
+                        </button>
+                        <button class="keyboardSound-OFF">
+                            <i class="fa-solid fa-volume-slash"></i>
+                        </button>
+                    </p>
+                    <p class="soundOption">
+                        <button class="testSound cleanSound-TEST">
+                            <i class="fa-solid fa-music"></i>
+                        </button>
+                        Звук очистки ввода: 
+                        <button class="cleanSound-ON">
+                            <i class="fa-solid fa-volume"></i>
+                        </button>
+                        <button class="cleanSound-OFF">
+                            <i class="fa-solid fa-volume-slash"></i>
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div class="lotsLoaderHolder">
+            <span class="lotsLoader"></span>
+            <div class="lotsLoadingPersents">0%</div>
+        </div>
+        <nav class="menu">
+            <button class="historyToggleOpen">
+                <i class="fa-solid fa-clock-rotate-left fa-shake"></i>
+                <div class="historyCounter"></div>
+            </button>
+            <button class="changelogToggleOpen">
+                <i class="fa-solid fa-code-compare"></i>
+            </button>
+            <i class="menuDevider"></i>
+            <button class="typeSwitch generatorTypeSwitchQR" generatorType="active">
+                <i class="fa-solid fa-qrcode"></i>
+            </button>
+            <button class="typeSwitch generatorTypeSwitchLots" generatorType="disabled">
+                <i class="fa-solid fa-toilet-paper-under"></i>
+            </button>
+            <button class="typeSwitch generatorTypeSwitchPolybox" generatorType="disabled" disabled disabled-by-developer="true">
+                <i class="fa-duotone fa-regular fa-cube" style="font-size: 22px;"></i>
+            </button>
+            <!-- <button class="qrTypeSwitch">
+                <div class="coolDownIndicator"></div>
+            </button> -->
+        </nav>
+        <nav class="contacts">
+            <a class="contactsGithub" href="#" target="_blank" disabled-by-developer="true" disabled inert>
+                <i class="fa-solid fa-code"></i>
+            </a>
+            <a class="contactsAuthor" href="https://rocan5.github.io/contacts/" target="_blank">
+                <i class="developer"></i>
+            </a>
+            <i class="menuDevider"></i>
+            <button class="callSettings">
+                <i class="fa-solid fa-gears"></i>
+            </button>
+            <button class="callAutorization" style="display: none;">
+                <i class="fa-regular fa-user-tie"></i>
+            </button>
+            <label for="toggleAltenrativeQR" class="toggleLabel" id="toggleAlternate">
+                <i class="fa-regular fa-wifi-slash"></i>
+                <input type="checkbox" id="toggleAltenrativeQR" class="toggleAltenrativeQR">
+            </label>
+        </nav>
+        <div class="shortcut forOtherSc" style="
+            right: 10px;
+            left: unset;">
+            <div class="shortcutContainer" style="
+                border: unset;
+                transition: 300ms;
+                background: linear-gradient(45deg, rgb(1 195 252), rgb(145 88 255));
+                padding: 2px 2px;">
+                <div style="
+                    display: flex;
+                    gap: 10px;
+                    padding: 13px;
+                    background: #000000db;
+                    border-radius: 8px;">
+                    <i class="fa-solid fa-meteor"></i>
+                    <p style=" font-size: 14px;">Версия для СЦ Ставрополь</p>
+                </div>
+            </div>
+        </div>
+        <div class="updateWrapper">
+            <div class="updateItem__blur"></div>
+            <div class="updateItem">
+                <div class="updateItem__container">
+                    <div class="updateItem__container__block">
+                        <i class="fa-solid fa-meteor"></i>
+                        <p>Доступно обновление</p>
+                    </div>
+                    <div class="updateItem__container__devider"></div>
+                    <div class="updateItem__container__section">
+                        <p>Страница автоматически перезагрузится через <span class="updateItem__countdown">30</span> сек.</p>
+                    </div>
+                    <div class="updateItem__container__delay">
+                        <button id="delayUpdate">
+                            Отложить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="qrHistory">
+            <div class="sectionDescription">
+                История
+                <button class="historyToggleClose">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="historyList" data-content=""></div>
+        </div>
+        
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+        <div class="changelogHistory">
+            <div class="changelogsectionDescription">
+                Changelog
+                <div class="expandOrCollapse">
+                    <button class="collapseChangelog"><i class="fa-solid fa-xmarks-lines"></i></button>
+                    <button class="expandChangelog"><i class="fa-duotone fa-chevrons-down"></i></button>
+                </div>
+                <button class="changelogToggleClose">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="changelogsectionList">
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.3
+                        <span class="itemTitle">unwrited</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Медиа запросов</p>
+                                    <p class="itemDescriptionTextInfoSub">Исправлены медиа запросы, некоретное отображение сгенерированного изображения при печати, изображение растягивалось и не центрировалось в диалогом окне печати</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Кнопка "История"</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлена новая кнопка меню, при нажатии на кнопку открывается котекстное меню "История"</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <button class="historyToggleOpenDemo">
+                                    <i class="fa-solid fa-clock-rotate-left fa-shake"></i>
+                                    <div class="historyCounterDemo">1</div>
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Контекстное меню "История"</p>
+                                    <p class="itemDescriptionTextInfoSub">Контекстное меню, которое содержит историю созданых QR-кодов за текущую сессию</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.4
+                        <span class="itemTitle">unwrited</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Стили</p>
+                                    <p class="itemDescriptionTextInfoSub">Были исправлена стилицая отоброжения некоторых элементов, так же исправлены медиа запросы и медиа print запросы</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">функционал открытия QR-кода из истории</p>
+                                    <p class="itemDescriptionTextInfoSub">При нажатии на QR-код в истории открывает новую страницы about:blank с ранее генерируем QR-Кодом</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.5
+                        <span class="itemTitle">unwrited</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-gear iconChange"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Кнопка "Печать Qr code"</p>
+                                    <p class="itemDescriptionTextInfoSub">Изменение функционала кнопки,в предыдущих версиях кнопка печатала QR на домашней страницы, в последущих версиях кнопка открывает новую страницы about:blank</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.6
+                        <span class="itemTitle">unwrited</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Оптимизация частиц</p>
+                                    <p class="itemDescriptionTextInfoSub">Значительные просадки FPS из-за долго нахождения на странице. в предыдущих версиях каждая частица генерировалась в индевидуальном теге div, в последующих версиях используется тэг &lt;canvas&gt;</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.7
+                        <span class="itemTitle">24.05.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Исправление meta тэгов</p>
+                                    <p class="itemDescriptionTextInfoSub">Улучшение стилей, изменение структуры DOM, подготовка к переходу с <i style="color: #2f7fff" class="fa-brands fa-css3"></i><span style="color: #2f7fff">.css</span> на <i style="color: #ff4ea8"  class="fa-brands fa-sass"></i><span style="color:#ff4ea8;">.scss</span></p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.8
+                        <span class="itemTitle">14.06.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-gear iconChange" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Автоматическое закрытие окна печати</p>
+                                    <p class="itemDescriptionTextInfoSub">После печати QR-кода открытая страница about:blank закрывается автоматически, через 2 секунды</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Индикатор времени</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлен индикатор времени перед автоматическим закрытием окна печати</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.9
+                        <span class="itemTitle">25.06.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Кнопка "Changelog"</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлена новая кнопка меню, при нажатии на кнопку открывается котекстное меню "Changelog"</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <button class="changelogToggleOpenDemo">
+                                    <i class="fa-solid fa-code-compare"></i>
+                                </button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Контекстное меню "Changelog"</p>
+                                    <p class="itemDescriptionTextInfoSub">Контекстное меню, которое содержит историю обновлений Веб страницы</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Кнопка "Удалить пробелы"</p>
+                                    <p class="itemDescriptionTextInfoSub">При нажатии на кнопку удаляет все лишние пробелы из поля ввода текста для генерации QR-кода"</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <button class="inputUpperResetSpacesDemo">Удалить пробелы</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.10
+                        <span class="itemTitle">15.07.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-gear iconChange"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Переход на SCSS</p>
+                                    <p class="itemDescriptionTextInfoSub">Полностью переписанная стилизация веб страницы, код переписан с чистого <i style="color: #2f7fff" class="fa-brands fa-css3"></i><span style="color: #2f7fff">.css</span> на препроцессор <i style="color: #ff4ea8"  class="fa-brands fa-sass"></i><span style="color:#ff4ea8;">.scss</span> !</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-gear iconChange"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Media Requests</p>
+                                    <p class="itemDescriptionTextInfoSub">Полностью переписаны и оптимизированны все Media Requests с <i style="color: #2f7fff" class="fa-brands fa-css3"></i><span style="color: #2f7fff">.css</span> на препроцессор <i style="color: #ff4ea8"  class="fa-brands fa-sass"></i><span style="color:#ff4ea8;">.scss</span>, старый файл media.css удалён из проэкта</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-gear iconChange"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Перписаны функции отрисовки частиц</p>
+                                    <p class="itemDescriptionTextInfoSub">Переписаны функции отрисовки частиц, в новой версии установлен лимит в 300 частиц, при достижении количества частиц данного значения. Предыдущие версии не учитывали накопление частиц а так же не успевали удалять достаточное количество частиц чтобы избежать их накопление</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <canvas id="particle-canvasDemov1-10"></canvas>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Предварительный просмотр Changelog</p>
+                                    <p class="itemDescriptionTextInfoSub">Изменение стилизации предпросмотра Changelog</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Генерация QR-Кода</p>
+                                    <p class="itemDescriptionTextInfoSub">Визуальное изменение в генерации QR-Кода. Ранее при генерации QR-Кода происходило смещение из-за центрирования элементов в Контейнере. В последующих версиях происходит плавная генерация.<br><br>Так же был добавлена анимация загрузки QR-Кода</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <img class="gifQrGeneration gifQrGeneration__before" src="img/qrBefore_v1.10.gif" alt="Генерация QR-Кода до версии v1.10">
+                                <img class="gifQrGeneration gifQrGeneration__after" src="img/qr_v1.10.gif" alt="Генерация QR-Кода с версии v1.10">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-ban iconDelete"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Удалить пробелы</p>
+                                    <p class="itemDescriptionTextInfoSub">Удалена кнопка "Удалить пробелы"</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo demoDeleted">
+                                <button class="inputUpperResetSpacesDemo">Удалить пробелы</button>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Кнопки "Открыть все" "Закрыть все" в Changelog</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлены кнопки для открытия всего списка изменений по версиям приложения в Changelog</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <div class="expandOrCollapseDemo">
+                                    <button class="collapseChangelogDemo"><i class="fa-solid fa-xmarks-lines"></i></button>
+                                    <button class="expandChangelogDemo"><i class="fa-duotone fa-chevrons-down"></i></button>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Checkbox "Удалить лишние пробелы"</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлен input типа checkbox с двумя состояниями, в состоянии checked(состояние по умолчанию) автоматически убирает все лишние пробелы из поля ввода и гененрирует QR-Код без пробелов, в состоянии unchecked позволяет ввод в поле ввода пробелы, символы переноса, абзацы и пустые символы</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <label for="toggleAutoTrimDemo" class="toggleLabelDemo">
+                                    <div class="labelContainer">
+                                        <div class="checkboxWrapper">
+                                            <input type="checkbox" id="toggleAutoTrimDemo" class="toggleAutoTrimDemo" checked>
+                                            <div class="inputBody">
+                                                <div class="inputDot"></div>
+                                            </div>
+                                        </div>
+                                        <p>Удалять лишние<br>пробелы</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Checkbox "Повреждённый заказ"</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлен input типа checkbox с двумя состояниями, в состоянии checked добавляет подпись "ПОВРЕЖДЁННЫЙ ЗАКАЗ" к генерации QR-Код, в состоянии unchecked(состояние по умолчанию) подпись "ПОВРЕЖДЁННЫЙ ЗАКАЗ" отсутствует</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <label for="toggleDamageTitileDemo" class="toggleLabelDemo">
+                                    <div class="labelContainer">
+                                        <div class="checkboxWrapper">
+                                            <input type="checkbox" id="toggleDamageTitileDemo" class="toggleDamageTitileDemo" checked>
+                                            <div class="inputBody">
+                                                <div class="inputDot"></div>
+                                            </div>
+                                        </div>
+                                        <p>Повреждённый заказ</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Сочетание клавиш Ctrl+Z</p>
+                                    <p class="itemDescriptionTextInfoSub">При Сочетание клавтшь <kbd>Ctrl</kbd><kbd>+</kbd><kbd>Z</kbd> очищаются поля ввода генерации QR-Кода, а так же сбрасывается текущий QR-Код</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <div class="shortcutDemo">
+                                    <kbd keyId="ctrl">Ctrl</kbd><p>+</p><kbd  keyId="z">Z</kbd>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Сочетание клавиш Ctrl+P</p>
+                                    <p class="itemDescriptionTextInfoSub">При Сочетание клавтшь <kbd>Ctrl</kbd><kbd>+</kbd><kbd>P</kbd> открывается окно печати QR-Код</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <div class="shortcutDemo">
+                                    <kbd keyId="ctrl">Ctrl</kbd><p>+</p><kbd  keyId="demo-p">P</kbd>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Котятки <i class="fa-solid fa-cat" style="::after{content: unset;}"></i></p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлено 50 <i class="fa-regular fa-gif" style="color:#dcff00;"></i><span style="color:#dcff00;">.gif</span> анимаций с котятами при отсутствии текста в поле ввода<br><br>Зачем ?<br>Так надо</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <div class="kittysDemo">
+                                    <svg width="200" height="200" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="18" cy="18" r="16" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="30, 100" transform="rotate(-90 18 18)" id="progress-ring"></circle>
+                                    </svg>
+                                    <div class="kittysDemoCounter">0</div>
+                                </div>
+                                <div class="kittysDemoPlayer">
+                                    <button class="kittysDemoPlayerPrev"><i class="fa-solid fa-left"></i></button>
+                                    <button class="kittysDemoPlayerControl"><i class="fa-solid fa-pause" id="playerControlIcon"></i></button>
+                                    <button class="kittysDemoPlayerNext"><i class="fa-solid fa-right"></i></button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.11
+                        <span class="itemTitle">21.07.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Генератор обезличенных лотов</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавленно меню генерации обезличенных лотов с порядковым номером и стелочкой</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.12
+                        <span class="itemTitle">05.09.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Архивация QR кодов</p>
+                                    <p class="itemDescriptionTextInfoSub">Создан канал в <a class="telegrammLink" href="https://t.me/ScKirovQrGenerator"><i class="fa-brands fa-telegram"></i> Telegramm</a>. При печати сгенерированного QR Кода, бот автоматически отправляет его в телеграмм канал с подробной информацией</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.13
+                        <span class="itemTitle">02.11.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Поле ввода "Начать с лота:"</p>
+                                    <p class="itemDescriptionTextInfoSub">Исправлен баг в поле ввода начальной точки нумерации страницы. Ранее при каждом изменении в поле воода, происходила генерация нового файла.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Печать пустого QR"</p>
+                                    <p class="itemDescriptionTextInfoSub">Исправлен баг, который допускал печать ещё не сгенерированного QR-Кода</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Индекатор загрузки генератора лотов</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлен индекатор генерации .pdf файла с обезличенными лотами</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Новый тип QR-Кода</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлен новый формат генерации QR-Кодов, для тех, кому удобнее печатать аномалии через QR-Генратор<br><br>Специально для тебмя Миша</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem">
+                    <button class="itemTitle">
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.14
+                        <span class="itemTitle">21.11.2024</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Исправление meta тегов</p>
+                                    <p class="itemDescriptionTextInfoSub">Исправлены meta теги, которые позволяют использовать на сайте иконки fontAwesome</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="polybox">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-duotone fa-regular fa-cube updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.1
+                        <span class="itemTitle">11.01.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Новый генератор лотов</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлен новый генератор для лотов полибоксов. Генератор воспринимает только лоты типа "F30000000000000?????"</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="lots">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-toilet-paper-under updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.4
+                        <span class="itemTitle">13.01.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Создание обезличенных лотов</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлено новое поле воода в генератор обезличенных лотов, теперь обезличенные лоты можно создавать нпрямую с сайта."</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="qr">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-qrcode updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.15
+                        <span class="itemTitle">11.05.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Описание аномалии</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлена возможность прописывать описание аномалии при генерации этикетки."</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="qr">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-qrcode updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.16
+                        <span class="itemTitle">19.05.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-ban iconDelete"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Запрет генерации</p>
+                                    <p class="itemDescriptionTextInfoSub">Удалена возможность создания этикеток для полибоксов при помощи генератор QR-Кодов из-за поступления жалоб на обнаружения подобных маркировок от СЦ Воронеж на других СЦ</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="qr">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-qrcode updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.17
+                        <span class="itemTitle">13.07.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Локальный режим</p>
+                                    <p class="itemDescriptionTextInfoSub">Добавлена возможность использовать альтернативный метод генерации QR-кодов при нестабильном соединении с Google-серверами. Альтернативный режим позволяет создавать ШК даже без интернета.</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <label for="toggleAltenrativeQRDemo" class="toggleLabelDemo">
+                                    <div class="labelContainer">
+                                        <div class="checkboxWrapper">
+                                            <input type="checkbox" id="toggleAltenrativeQRDemo" class="toggleAltenrativeQRDemo" checked>
+                                            <div class="inputBody">
+                                                <div class="inputDot"></div>
+                                            </div>
+                                        </div>
+                                        <p>Локальный<br>режим</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Табиндекс чекбоксов</p>
+                                    <p class="itemDescriptionTextInfoSub">Изменена стилизация видимого фокуса на чекбоксах, теперь при использовании кнопок Tab, Shift+Tab подсвечивается чекбокс, который находится в фокусе.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="project">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-meteor updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>drop-1
+                        <span class="itemTitle">23.07.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-gear iconChange"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Переписана стилизация чекбоксов</p>
+                                    <p class="itemDescriptionTextInfoSub">Переписан функционал отображения чекбоксов для лучшего переиспользования псвевдо компонента. Добавлены два псевдо свойства для указания цвета чекбокса(ов), вместо повторного использования конеректного цвета в разных частях кода</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Локальный режим стал лучше</p>
+                                    <p class="itemDescriptionTextInfoSub">Теперь локальный режим работает на всё веб сайте, поддерживается генерация этикеток на заказы и <u>полибоксы!</u></p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-wrench iconFix"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Локальный режим переехал</p>
+                                    <p class="itemDescriptionTextInfoSub">Изменено расположение и внешний вид локального режима, так как функция задействуется теперь не только в генерации этикеток на заказы</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <label for="toggleAltenrativeQR__demo" class="toggleNewAlternate" id="toggleAlternate__demo">
+                                    <i class="fa-regular fa-wifi-slash"></i>
+                                    <input type="checkbox" id="toggleAltenrativeQR__demo" class="toggleAltenrativeQR__demo">
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-wrench iconFix" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Текстовая индикация состояния чекбокса</p>
+                                    <p class="itemDescriptionTextInfoSub">Изменено отображение состояния чекбокса, добавлена текстовая идентификация "ON"/"OFF"</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <label for="toggleMasterCheckbox" class="toggleLabelDemo" inert>
+                                    <div class="labelContainer">
+                                        <div class="checkboxWrapper">
+                                            <input type="checkbox" id="toggleMasterCheckbox" class="toggleMasterCheckbox" inert>
+                                            <div class="inputBody">
+                                                <div class="inputDot"></div>
+                                            </div>
+                                        </div>
+                                        <p>Пример чекбокса</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-ban iconDelete" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Подсказка сочетания Ctrl+Z</p>
+                                    <p class="itemDescriptionTextInfoSub">Удалена подсказка сочетания клавишь <kbd>Ctrl</kbd><kbd>+</kbd><kbd>Z</kbd> , так как перестала быть актуальной, функционал остался</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <div class="shortcutDemo">
+                                    <kbd keyId="ctrl">Ctrl</kbd><p>+</p><kbd  keyId="z">Z</kbd>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-solid fa-ban iconDelete" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Подсказка сочетания Ctrl+P</p>
+                                    <p class="itemDescriptionTextInfoSub">Удалена подсказка сочетания клавишь <kbd>Ctrl</kbd><kbd>+</kbd><kbd>P</kbd> , так как перестала быть актуальной, функционал остался</p>
+                                </div>
+                            </div>
+                            <div class="itemDescriptionDemo">
+                                <div class="shortcutDemo">
+                                    <kbd keyId="ctrl">Ctrl</kbd><p>+</p><kbd  keyId="demo-p">P</kbd>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="changeLogItem" changeType="project">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-meteor updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>drop-2
+                        <span class="itemTitle">01.08.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-wrench iconFix" aria-hidden="true"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Баг создания аномлии в Локальном режиме</p>
+                                    <p class="itemDescriptionTextInfoSub">Исправлен баг при генерации аномлии в локальном режиме</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <!-- <div class="changeLogItem" changeType="addUsers">
+                    <button class="itemTitle">
+                        <i aria-hidden="true" class="fa-solid fa-id-card updateIcon"></i>
+                        <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>version 1.0
+                        <span class="itemTitle">??.05.2025</span>
+                    </button>
+                    <ul class="itemDescription">
+                        <li>
+                            <div class="itemDescriptionTitle">
+                                <i class="fa-regular fa-circle-plus iconUpdate"></i>
+                                <div class="itemDescriptionText">
+                                    <p class="itemDescriptionTextInfo">Новый генератор</p>
+                                    <p class="itemDescriptionTextInfoSub">В проект добавелн новый генератор, позволяющий создавать изображения для быстрого входа сотрудников в персональный яндекс аккаунт.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+        
+        <div class="mainContentContainer">
+            <canvas id="particle-canvas"></canvas>
+            <div class="wrapper">
+                <h1 class="webTitleBlur">QR-Код Генератор</h1>
+                <h1 class="webTitle webTitleTransition">QR-Код Генератор
+                    <div class="versionName webTitle-extra-Transition">v1.15</div>
+                    <div class="authourName webTitle-extra-Transition">от Димана</div>
+                </h1>
+                <!------------------------------------------------------------------------------------------------------------->
+                <div class="container containerQR visible" qrType="hidden" swtichTypeMode="active">
+                    <button class="clear__input"><i class="fa-solid fa-trash"></i></button>
+                    <div class="inputHolder">
+                        <form>
+                            <label for="toggleAutoTrim" class="toggleLabel">
+                                <div class="labelContainer">
+                                    <div class="checkboxWrapper">
+                                        <input type="checkbox" id="toggleAutoTrim" class="toggleAutoTrim" checked>
+                                        <div class="inputBody">
+                                            <div class="inputDot"></div>
+                                        </div>
+                                    </div>
+                                    <p>Удалять лишние<br>пробелы</p>
+                                </div>
+                            </label>
+                            <div class="inputContainer">
+                                <input type="text" id="qr-text" class="dataInput orderNumber" autocomplete="off" id="name" name="name" placeholder="Номер заказа">
+                                <label html="name" class="dataInputLabel">Номер заказа</label>
+                                <div class="deleteInput"><i class="fa-solid fa-trash"></i></div>
+                            </div>
+                            <label for="toggleDamageTitile" class="toggleLabel">
+                                <div class="labelContainer" id="damageVisible" isVisible="true">
+                                    <div class="checkboxWrapper">
+                                        <input type="checkbox" id="toggleDamageTitile" class="toggleDamageTitile">
+                                        <div class="inputBody">
+                                            <div class="inputDot"></div>
+                                        </div>
+                                    </div>
+                                    <p>Повреждённый заказ</p>
+                                </div>
+                                <div class="inputContainer" id="anomalyDesccription" isVisible="false" inert>
+                                    <input type="text" id="anomaly-description" class="dataInputDescription anomalyDesciption" autocomplete="off" id="description" name="description" placeholder="Описаниие аномалии">
+                                    <label html="description" class="dataInputLabel">Описаниие аномалии</label>
+                                    <div class="deleteInput"><i class="fa-solid fa-trash"></i></div>
+                                </div>
+                            </label>
+                        </form>
+                        <button class="print__code"><p>Печать QR Code</p></button>
+                    </div>
+                    <div class="qrContainer">
+                        <div id="qr-code">
+                            <p class="qrCodeDefaultText">Введите текст в поле ввода, чтобы сгенерировать QR-код.</p>
+                        </div>
+                        <div class="qrLoader"></div>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------->
+                <div class="container containerLots hidden" qrType="hidden" swtichTypeMode="disabled">
+                    <div class="fileInputContainer">
+                        <div class="createOrphanLotsContainer createOrphanLotsnoData" style="display: none;">
+                            <div class="createOrphanLotsLimitAttention">Max = 150 лотов</div>
+                            <div class="createOrphanLotsStatus">
+                                <i class="fa-solid fa-question"></i>
+                            </div>
+                            <div class="createOrphanLotsExtraBorderOutline"></div>
+                            <div class="createOrphanLotsExtraBorder"></div>
+                            <input class="createOrphanLotsInput" placeholder="Кол-во лотов" type="number" min="1" max="999" step="1" maxlength="3">
+                            <div class="createOrphanLotsArrowIcon">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                            <button class="createOrphanLotsButton" disabled>
+                                <i class="fa-solid fa-file-plus"></i>
+                            </button>
+                        </div>
+                        <div class="devider" style="display: none;"></div>
+                        <form>
+                            <label for="startFromNumberCheckbox" class="toggleStartNumber">
+                                <div class="labelContainer">
+                                    <div class="checkboxWrapper">
+                                        <input type="checkbox" id="startFromNumberCheckbox"  class="startFromNumberCheckbox" class="toggleStartNumber">
+                                        <div class="inputBody">
+                                            <div class="inputDot"></div>
+                                        </div>
+                                    </div>
+                                    <p>Начать с номера</p>
+                                </div>
+                                <label for="startFromNumberInput" id="startFromNumberLabel">
+                                    <input type="number" id="startFromNumberInput" class="startFromNumberInput" min="1" max="999" step="1" maxlength="3" placeholder="Введите номер" disabled>
+                                </label>
+                            </label>
+                        </form>
+                        <button id="clearFileButton">Удалить файл</button>
+                        <div class="buttonsContainer">
+                            <button id="downloadButton" disabled=""><i class="fa-solid fa-download"></i></button>
+                            <button id="printButton" disabled=""><i class="fa-solid fa-print"></i></button>
+                        </div>
+                    </div>
+                    <div id="dropZone">
+                        <input type="file" id="fileInput" style="display: none;" accept="application/pdf">
+                        <i class="fa-regular fa-circle-plus dropZoneIcon"></i>
+                        Перетащите файл сюда или нажмите для выбора
+                        <div id="fileName">Нет файла</div>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------->
+                <div class="container containerPolybox hidden" qrType="hidden" swtichTypeMode="disabled">
+                    <button class="clear__input"><i class="fa-solid fa-trash"></i></button>
+                    <div class="inputHolder">
+                        <div class="polyboxExtraMessage">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p>В генератор можно вводить <span style="text-decoration: underline;">только ЛОТЫ</span> полибоксов!</p>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </div>
+                        <div class="polyboxEanglishOnly">
+                            <i class="fa-solid fa-language"></i>
+                            <p>Только английский язык!</p>
+                            <i class="fa-solid fa-language"></i>
+                        </div>
+                        <form>
+                            <div class="inputContainer">
+                                <input type="text" id="qrPoly-text" class="dataInput orderNumber" autocomplete="off" id="namePoly" name="namePoly" placeholder="Номер Полибокса" maxlength="20">
+                                <label html="namePoly" class="dataInputLabel">Номер Полибокса</label>
+                                <div class="deleteInput"><i class="fa-solid fa-trash"></i></div>
+                            </div>
+                        </form>
+                        <button class="print__code printCodePoly"><p>Печать QR Code</p></button>
+                    </div>
+                    <div class="qrContainer">
+                        <div id="qr-code" class="qr-codePoly">
+                            <p class="qrCodeDefaultText">Введите номер полибокса и выберите направление отгрузки.</p>
+                        </div>
+                        <div class="qrLoader qrLoaderPoly"></div>
+                    </div>
+                    <div class="directionChoosContainer">
+                        <div class="chooseFlowTitle">Выбор направления:</div>
+                        <ul>
+                            <li>
+                                <input type="radio" id="gribkiDay" name="direction" checked/>
+                                <label for="gribkiDay">
+                                    <p>СЦ Грибки</p>
+                                    <div class="cellID">24</div>
+                                    <i class="fa-solid fa-sun cellSlot"></i>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                    <i class="fa-solid fa-thumbtack cellPinned"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="gribkiNight" name="direction"/>
+                                <label for="gribkiNight">
+                                    <p>СЦ Грибки</p>
+                                    <div class="cellID">25</div>
+                                    <i class="fa-solid fa-moon cellSlot"></i>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                    <i class="fa-solid fa-thumbtack cellPinned"></i>
+                                </label>
+                            </li>
+                            <!-- <li>
+                                <input type="radio" id="tarnDay" name="direction"/>
+                                <label for="tarnDay">
+                                    <p>МК Тарный</p>
+                                    <div class="cellID">17</div>
+                                    <i class="fa-solid fa-sun cellSlot"></i>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                    <i class="fa-solid fa-thumbtack cellPinned"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="tarnNight" name="direction"/>
+                                <label for="tarnNight">
+                                    <p>МК Тарный</p>
+                                    <div class="cellID">11</div>
+                                    <i class="fa-solid fa-moon cellSlot"></i>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                    <i class="fa-solid fa-thumbtack cellPinned"></i>
+                                </label>
+                            </li> -->
+                            <li>
+                                <input type="radio" id="rostov" name="direction"/>
+                                <label for="rostov">
+                                    <p>СЦ Ростов</p>
+                                    <div class="cellID">16</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-right-to-line isCross isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                    <i class="fa-solid fa-thumbtack cellPinned"></i>
+                                </label>
+                            </li>
+                            <div class="devider"></div>
+                            <li>
+                                <input type="radio" id="gribki" name="direction"/>
+                                <label for="gribki">
+                                    <p>den noch drop</p>
+                                    <div class="cellID">–</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-right-to-line isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="belgorod" name="direction"/>
+                                <label for="belgorod">
+                                    <p>СЦ Белгород</p>
+                                    <div class="cellID">1</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-right-to-line isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="kursk" name="direction"/>
+                                <label for="kursk">
+                                    <p>СЦ Курск</p>
+                                    <div class="cellID">2</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-right-to-line isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="lipetsk" name="direction"/>
+                                <label for="lipetsk">
+                                    <p>СЦ Липецк</p>
+                                    <div class="cellID">3</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-right-to-line isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="samara" name="direction"/>
+                                <label for="samara">
+                                    <p>СЦ Самара</p>
+                                    <div class="cellID">7</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="mamiri" name="direction"/>
+                                <label for="mamiri">
+                                    <p>СЦ Мамыри</p>
+                                    <div class="cellID">8</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="troitskiy" name="direction"/>
+                                <label for="troitskiy">
+                                    <p>СЦ Троицкий</p>
+                                    <div class="cellID">9</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="kazan" name="direction"/>
+                                <label for="kazan">
+                                    <p>СЦ Казань</p>
+                                    <div class="cellID">10</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="zapad" name="direction"/>
+                                <label for="zapad">
+                                    <p>СЦ Запад</p>
+                                    <div class="cellID">12</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="sever" name="direction"/>
+                                <label for="sever">
+                                    <p>СЦ Север</p>
+                                    <div class="cellID">13</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="spb" name="direction"/>
+                                <label for="spb">
+                                    <p>СЦ СПБ Бугры</p>
+                                    <div class="cellID">14</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="ekb" name="direction"/>
+                                <label for="ekb">
+                                    <p>СЦ Екатеринбург</p>
+                                    <div class="cellID">15</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="krasnodar" name="direction"/>
+                                <label for="krasnodar">
+                                    <p>СЦ Краснодар</p>
+                                    <div class="cellID">21</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="nizNovg" name="direction"/>
+                                <label for="nizNovg">
+                                    <p>СЦ Нижний Новгород</p>
+                                    <div class="cellID">22</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="kubinsk" name="direction"/>
+                                <label for="kubinsk">
+                                    <p>СЦ Кубинская</p>
+                                    <div class="cellID">23</div>
+                                    <div class="crossContainer">
+                                        <i class="fa-solid fa-shuffle isCross"></i>
+                                    </div>
+                                    <i class="fa-solid fa-location-dot cellLocation"></i>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!------------------------------------------------------------------------------------------------------------->
+                <div class="container containerCarts hidden" qrType="hidden" swtichTypeMode="disabled">
+                    <button class="clear__input"><i class="fa-solid fa-trash"></i></button>
+                    <div class="inputHolder">
+                        <form>
+                            <div class="inputContainer">
+                                <input type="text" id="qr-text" class="dataInput orderNumber" autocomplete="off" id="name" name="name" placeholder="Логин сотрудника">
+                                <label html="name" class="dataInputLabel">Логин сотрудника</label>
+                                <div class="deleteInput"><i class="fa-solid fa-trash"></i></div>
+                            </div>
+                        </form>
+                        <button class="print__code"><p>Печать</p></button>
+                    </div>
+                    <div class="qrContainer">
+                        <div id="qr-code">
+                            <p class="qrCodeDefaultText">Введите текст в поле ввода, чтобы сгенерировать QR-код.</p>
+                        </div>
+                        <div class="qrLoader"></div>
+                    </div>
+                </div>
+                <!-- ------------------------------------------------------------------------------------------->
+            </div>
+        </div>
+        <div id="image-container"></div> <!-- Контейнер для отображения изображения QR-Кодов-->
+        <div id="image-containerPoly"></div> <!-- Контейнер для отображения изображения Полибоксов-->
+        <script src="libs/qrcode.min.js"></script>
+        <script src="app.js"></script>
+        <script src="app-lot.js"></script>
+        <script src="polybox.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+        <!-- <script src="https://kit.fontawesome.com/ffceda30b6.js" crossorigin="anonymous"></script> -->
+    </section>
+</body>
+</html>
